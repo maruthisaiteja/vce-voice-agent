@@ -1,0 +1,107 @@
+{
+  "passed": 25,
+  "total": 25,
+  "scope": "Compiled Worker HTTP tests with local D1/R2 and synthetic speech-provider replies; no live vendor calls",
+  "results": [
+    {
+      "name": "Compiled app renders",
+      "passed": true
+    },
+    {
+      "name": "Unauthenticated API rejects access",
+      "passed": true
+    },
+    {
+      "name": "Overview seeds college facts and empty HOD addresses",
+      "passed": true
+    },
+    {
+      "name": "Cross-origin mutation rejects access",
+      "passed": true
+    },
+    {
+      "name": "Compiled resolver quotes the qualified annual fee",
+      "passed": true
+    },
+    {
+      "name": "Disabled premium audio returns a configuration error",
+      "passed": true
+    },
+    {
+      "name": "Hosted tool rejects staff headers without its scoped credential",
+      "passed": true
+    },
+    {
+      "name": "Hosted hook authenticates, starts once and refuses arbitrary actions",
+      "passed": true
+    },
+    {
+      "name": "Premium chain passes the exact approved answer to speech",
+      "passed": true
+    },
+    {
+      "name": "Speech outage still returns the verified answer",
+      "passed": true
+    },
+    {
+      "name": "Invalid audio format is rejected",
+      "passed": true
+    },
+    {
+      "name": "Email preparation remains unsent without an address",
+      "passed": true
+    },
+    {
+      "name": "Realtime rejects unverified caller playback before provider access",
+      "passed": true
+    },
+    {
+      "name": "Critical hearing requires confirmation before answering or speech",
+      "passed": true
+    },
+    {
+      "name": "Confirmed text is resolved server-side and exact text reaches TTS",
+      "passed": true
+    },
+    {
+      "name": "Sarvam listening returns text without exposing a provider credential",
+      "passed": true
+    },
+    {
+      "name": "Streaming speech sends exact authoritative text and PCM after result metadata",
+      "passed": true
+    },
+    {
+      "name": "Opening is spoken as a fixed AI disclosure and ignores arbitrary supplied content",
+      "passed": true
+    },
+    {
+      "name": "Streaming TTS failure preserves authoritative text but never reports successful speech",
+      "passed": true
+    },
+    {
+      "name": "Live speech cross-origin and unknown modes are rejected",
+      "passed": true
+    },
+    {
+      "name": "Crawl evidence is staff-only, paginated and remains unapproved",
+      "passed": true
+    },
+    {
+      "name": "Concurrent transcription requests respect the durable per-call cap",
+      "passed": true
+    },
+    {
+      "name": "Expired voice calls reject speech and listening before provider work",
+      "passed": true
+    },
+    {
+      "name": "Ended voice session cannot answer a confirmed transcript",
+      "passed": true
+    },
+    {
+      "name": "Ended calls cannot mint listening credentials or stream speech",
+      "passed": true
+    }
+  ]
+}

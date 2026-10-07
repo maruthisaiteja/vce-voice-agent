@@ -1,0 +1,725 @@
+{
+  "scope": "80 proposed test calls, not measurements; language prompts need native-speaker review",
+  "cases": [
+    {
+      "caseId": "en-headset-fee",
+      "language": "en",
+      "device": "headset",
+      "scenario": "fee",
+      "prompt": "What is the B.Tech tuition fee?",
+      "expectedBehavior": "Quote only the approved current qualified fee; do not invent additional charges.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "en-headset-deadline",
+      "language": "en",
+      "device": "headset",
+      "scenario": "deadline",
+      "prompt": "What is the current last date for supplementary exam fees?",
+      "expectedBehavior": "Ask for missing exam context and withhold unverified dates.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "en-headset-name",
+      "language": "en",
+      "device": "headset",
+      "scenario": "name",
+      "prompt": "Who is the CSE HOD?",
+      "expectedBehavior": "Use current approved name; do not guess an address.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "en-headset-correction",
+      "language": "en",
+      "device": "headset",
+      "scenario": "correction",
+      "prompt": "Ask the B.Tech fee, then correct yourself: No, I meant MBA.",
+      "expectedBehavior": "Use the corrected programme, without repeating the superseded answer.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "en-headset-interruption",
+      "language": "en",
+      "device": "headset",
+      "scenario": "interruption",
+      "prompt": "Ask library hours, then interrupt with: Where is the library?",
+      "expectedBehavior": "Stop old audio, answer the new question and never resume the old turn.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "en-headset-unknown",
+      "language": "en",
+      "device": "headset",
+      "scenario": "unknown",
+      "prompt": "What is tomorrow’s exact hostel room availability?",
+      "expectedBehavior": "Withhold unverified live availability; offer office help.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "en-headset-private",
+      "language": "en",
+      "device": "headset",
+      "scenario": "private",
+      "prompt": "What is my fee balance?",
+      "expectedBehavior": "Do not disclose personal records without the college verification workflow.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "en-headset-outage",
+      "language": "en",
+      "device": "headset",
+      "scenario": "outage",
+      "prompt": "Ask a library question while the tester simulates speech-provider failure.",
+      "expectedBehavior": "Show/announce available failure guidance; never invent an answer or retry an action.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "en-headset-goodbye",
+      "language": "en",
+      "device": "headset",
+      "scenario": "goodbye",
+      "prompt": "Goodbye.",
+      "expectedBehavior": "Finish a short goodbye and release the microphone.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "en-headset-noisy",
+      "language": "en",
+      "device": "headset",
+      "scenario": "noisy",
+      "prompt": "Ask about college buses with ordinary background conversation.",
+      "expectedBehavior": "Transcribe accurately or ask for repetition; do not guess.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "en-phone_quality-fee",
+      "language": "en",
+      "device": "phone_quality",
+      "scenario": "fee",
+      "prompt": "What is the B.Tech tuition fee?",
+      "expectedBehavior": "Quote only the approved current qualified fee; do not invent additional charges.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "en-phone_quality-deadline",
+      "language": "en",
+      "device": "phone_quality",
+      "scenario": "deadline",
+      "prompt": "What is the current last date for supplementary exam fees?",
+      "expectedBehavior": "Ask for missing exam context and withhold unverified dates.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "en-phone_quality-name",
+      "language": "en",
+      "device": "phone_quality",
+      "scenario": "name",
+      "prompt": "Who is the CSE HOD?",
+      "expectedBehavior": "Use current approved name; do not guess an address.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "en-phone_quality-correction",
+      "language": "en",
+      "device": "phone_quality",
+      "scenario": "correction",
+      "prompt": "Ask the B.Tech fee, then correct yourself: No, I meant MBA.",
+      "expectedBehavior": "Use the corrected programme, without repeating the superseded answer.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "en-phone_quality-interruption",
+      "language": "en",
+      "device": "phone_quality",
+      "scenario": "interruption",
+      "prompt": "Ask library hours, then interrupt with: Where is the library?",
+      "expectedBehavior": "Stop old audio, answer the new question and never resume the old turn.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "en-phone_quality-unknown",
+      "language": "en",
+      "device": "phone_quality",
+      "scenario": "unknown",
+      "prompt": "What is tomorrow’s exact hostel room availability?",
+      "expectedBehavior": "Withhold unverified live availability; offer office help.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "en-phone_quality-private",
+      "language": "en",
+      "device": "phone_quality",
+      "scenario": "private",
+      "prompt": "What is my fee balance?",
+      "expectedBehavior": "Do not disclose personal records without the college verification workflow.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "en-phone_quality-outage",
+      "language": "en",
+      "device": "phone_quality",
+      "scenario": "outage",
+      "prompt": "Ask a library question while the tester simulates speech-provider failure.",
+      "expectedBehavior": "Show/announce available failure guidance; never invent an answer or retry an action.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "en-phone_quality-goodbye",
+      "language": "en",
+      "device": "phone_quality",
+      "scenario": "goodbye",
+      "prompt": "Goodbye.",
+      "expectedBehavior": "Finish a short goodbye and release the microphone.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "en-phone_quality-noisy",
+      "language": "en",
+      "device": "phone_quality",
+      "scenario": "noisy",
+      "prompt": "Ask about college buses with ordinary background conversation.",
+      "expectedBehavior": "Transcribe accurately or ask for repetition; do not guess.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-headset-fee",
+      "language": "te",
+      "device": "headset",
+      "scenario": "fee",
+      "prompt": "B.Tech ఫీజు ఎంత?",
+      "expectedBehavior": "Quote only the approved current qualified fee; do not invent additional charges.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-headset-deadline",
+      "language": "te",
+      "device": "headset",
+      "scenario": "deadline",
+      "prompt": "సప్లిమెంటరీ పరీక్ష ఫీజుకు చివరి తేదీ ఎప్పుడు?",
+      "expectedBehavior": "Ask for missing exam context and withhold unverified dates.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-headset-name",
+      "language": "te",
+      "device": "headset",
+      "scenario": "name",
+      "prompt": "CSE హెచ్ ఓ డీ ఎవరు?",
+      "expectedBehavior": "Use current approved name; do not guess an address.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-headset-correction",
+      "language": "te",
+      "device": "headset",
+      "scenario": "correction",
+      "prompt": "B.Tech ఫీజు అడిగి, కాదు MBA గురించి అడిగాను అని సరిచేయండి.",
+      "expectedBehavior": "Use the corrected programme, without repeating the superseded answer.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-headset-interruption",
+      "language": "te",
+      "device": "headset",
+      "scenario": "interruption",
+      "prompt": "లైబ్రరీ సమయం అడిగి, సమాధానం మధ్యలో లైబ్రరీ ఎక్కడ అని అడగండి.",
+      "expectedBehavior": "Stop old audio, answer the new question and never resume the old turn.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-headset-unknown",
+      "language": "te",
+      "device": "headset",
+      "scenario": "unknown",
+      "prompt": "రేపు హాస్టల్‌లో ఎన్ని గదులు ఖాళీగా ఉంటాయి?",
+      "expectedBehavior": "Withhold unverified live availability; offer office help.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-headset-private",
+      "language": "te",
+      "device": "headset",
+      "scenario": "private",
+      "prompt": "నా ఫీజు బాకీ ఎంత?",
+      "expectedBehavior": "Do not disclose personal records without the college verification workflow.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-headset-outage",
+      "language": "te",
+      "device": "headset",
+      "scenario": "outage",
+      "prompt": "టెస్టర్ స్పీచ్ సర్వీస్ వైఫల్యాన్ని అనుకరించినప్పుడు లైబ్రరీ గురించి అడగండి.",
+      "expectedBehavior": "Show/announce available failure guidance; never invent an answer or retry an action.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-headset-goodbye",
+      "language": "te",
+      "device": "headset",
+      "scenario": "goodbye",
+      "prompt": "బై.",
+      "expectedBehavior": "Finish a short goodbye and release the microphone.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-headset-noisy",
+      "language": "te",
+      "device": "headset",
+      "scenario": "noisy",
+      "prompt": "వెనుక సంభాషణ వినిపిస్తుండగా కాలేజీ బస్సుల గురించి అడగండి.",
+      "expectedBehavior": "Transcribe accurately or ask for repetition; do not guess.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-phone_quality-fee",
+      "language": "te",
+      "device": "phone_quality",
+      "scenario": "fee",
+      "prompt": "B.Tech ఫీజు ఎంత?",
+      "expectedBehavior": "Quote only the approved current qualified fee; do not invent additional charges.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-phone_quality-deadline",
+      "language": "te",
+      "device": "phone_quality",
+      "scenario": "deadline",
+      "prompt": "సప్లిమెంటరీ పరీక్ష ఫీజుకు చివరి తేదీ ఎప్పుడు?",
+      "expectedBehavior": "Ask for missing exam context and withhold unverified dates.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-phone_quality-name",
+      "language": "te",
+      "device": "phone_quality",
+      "scenario": "name",
+      "prompt": "CSE హెచ్ ఓ డీ ఎవరు?",
+      "expectedBehavior": "Use current approved name; do not guess an address.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-phone_quality-correction",
+      "language": "te",
+      "device": "phone_quality",
+      "scenario": "correction",
+      "prompt": "B.Tech ఫీజు అడిగి, కాదు MBA గురించి అడిగాను అని సరిచేయండి.",
+      "expectedBehavior": "Use the corrected programme, without repeating the superseded answer.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-phone_quality-interruption",
+      "language": "te",
+      "device": "phone_quality",
+      "scenario": "interruption",
+      "prompt": "లైబ్రరీ సమయం అడిగి, సమాధానం మధ్యలో లైబ్రరీ ఎక్కడ అని అడగండి.",
+      "expectedBehavior": "Stop old audio, answer the new question and never resume the old turn.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-phone_quality-unknown",
+      "language": "te",
+      "device": "phone_quality",
+      "scenario": "unknown",
+      "prompt": "రేపు హాస్టల్‌లో ఎన్ని గదులు ఖాళీగా ఉంటాయి?",
+      "expectedBehavior": "Withhold unverified live availability; offer office help.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-phone_quality-private",
+      "language": "te",
+      "device": "phone_quality",
+      "scenario": "private",
+      "prompt": "నా ఫీజు బాకీ ఎంత?",
+      "expectedBehavior": "Do not disclose personal records without the college verification workflow.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-phone_quality-outage",
+      "language": "te",
+      "device": "phone_quality",
+      "scenario": "outage",
+      "prompt": "టెస్టర్ స్పీచ్ సర్వీస్ వైఫల్యాన్ని అనుకరించినప్పుడు లైబ్రరీ గురించి అడగండి.",
+      "expectedBehavior": "Show/announce available failure guidance; never invent an answer or retry an action.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-phone_quality-goodbye",
+      "language": "te",
+      "device": "phone_quality",
+      "scenario": "goodbye",
+      "prompt": "బై.",
+      "expectedBehavior": "Finish a short goodbye and release the microphone.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-phone_quality-noisy",
+      "language": "te",
+      "device": "phone_quality",
+      "scenario": "noisy",
+      "prompt": "వెనుక సంభాషణ వినిపిస్తుండగా కాలేజీ బస్సుల గురించి అడగండి.",
+      "expectedBehavior": "Transcribe accurately or ask for repetition; do not guess.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "hi-headset-fee",
+      "language": "hi",
+      "device": "headset",
+      "scenario": "fee",
+      "prompt": "B.Tech की फीस कितनी है?",
+      "expectedBehavior": "Quote only the approved current qualified fee; do not invent additional charges.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "hi-headset-deadline",
+      "language": "hi",
+      "device": "headset",
+      "scenario": "deadline",
+      "prompt": "सप्लीमेंट्री परीक्षा की फीस की अंतिम तारीख क्या है?",
+      "expectedBehavior": "Ask for missing exam context and withhold unverified dates.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "hi-headset-name",
+      "language": "hi",
+      "device": "headset",
+      "scenario": "name",
+      "prompt": "CSE के विभागाध्यक्ष कौन हैं?",
+      "expectedBehavior": "Use current approved name; do not guess an address.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "hi-headset-correction",
+      "language": "hi",
+      "device": "headset",
+      "scenario": "correction",
+      "prompt": "B.Tech की फीस पूछें, फिर कहें: नहीं, मेरा मतलब MBA था।",
+      "expectedBehavior": "Use the corrected programme, without repeating the superseded answer.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "hi-headset-interruption",
+      "language": "hi",
+      "device": "headset",
+      "scenario": "interruption",
+      "prompt": "लाइब्रेरी का समय पूछें, जवाब के बीच में पूछें: लाइब्रेरी कहाँ है?",
+      "expectedBehavior": "Stop old audio, answer the new question and never resume the old turn.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "hi-headset-unknown",
+      "language": "hi",
+      "device": "headset",
+      "scenario": "unknown",
+      "prompt": "कल हॉस्टल में कितने कमरे खाली होंगे?",
+      "expectedBehavior": "Withhold unverified live availability; offer office help.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "hi-headset-private",
+      "language": "hi",
+      "device": "headset",
+      "scenario": "private",
+      "prompt": "मेरी फीस कितनी बाकी है?",
+      "expectedBehavior": "Do not disclose personal records without the college verification workflow.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "hi-headset-outage",
+      "language": "hi",
+      "device": "headset",
+      "scenario": "outage",
+      "prompt": "परीक्षक स्पीच सेवा की विफलता का परीक्षण करे, तब लाइब्रेरी का सवाल पूछें।",
+      "expectedBehavior": "Show/announce available failure guidance; never invent an answer or retry an action.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "hi-headset-goodbye",
+      "language": "hi",
+      "device": "headset",
+      "scenario": "goodbye",
+      "prompt": "अलविदा।",
+      "expectedBehavior": "Finish a short goodbye and release the microphone.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "hi-headset-noisy",
+      "language": "hi",
+      "device": "headset",
+      "scenario": "noisy",
+      "prompt": "पीछे बातचीत की आवाज़ के साथ कॉलेज बस के बारे में पूछें।",
+      "expectedBehavior": "Transcribe accurately or ask for repetition; do not guess.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "hi-phone_quality-fee",
+      "language": "hi",
+      "device": "phone_quality",
+      "scenario": "fee",
+      "prompt": "B.Tech की फीस कितनी है?",
+      "expectedBehavior": "Quote only the approved current qualified fee; do not invent additional charges.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "hi-phone_quality-deadline",
+      "language": "hi",
+      "device": "phone_quality",
+      "scenario": "deadline",
+      "prompt": "सप्लीमेंट्री परीक्षा की फीस की अंतिम तारीख क्या है?",
+      "expectedBehavior": "Ask for missing exam context and withhold unverified dates.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "hi-phone_quality-name",
+      "language": "hi",
+      "device": "phone_quality",
+      "scenario": "name",
+      "prompt": "CSE के विभागाध्यक्ष कौन हैं?",
+      "expectedBehavior": "Use current approved name; do not guess an address.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "hi-phone_quality-correction",
+      "language": "hi",
+      "device": "phone_quality",
+      "scenario": "correction",
+      "prompt": "B.Tech की फीस पूछें, फिर कहें: नहीं, मेरा मतलब MBA था।",
+      "expectedBehavior": "Use the corrected programme, without repeating the superseded answer.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "hi-phone_quality-interruption",
+      "language": "hi",
+      "device": "phone_quality",
+      "scenario": "interruption",
+      "prompt": "लाइब्रेरी का समय पूछें, जवाब के बीच में पूछें: लाइब्रेरी कहाँ है?",
+      "expectedBehavior": "Stop old audio, answer the new question and never resume the old turn.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "hi-phone_quality-unknown",
+      "language": "hi",
+      "device": "phone_quality",
+      "scenario": "unknown",
+      "prompt": "कल हॉस्टल में कितने कमरे खाली होंगे?",
+      "expectedBehavior": "Withhold unverified live availability; offer office help.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "hi-phone_quality-private",
+      "language": "hi",
+      "device": "phone_quality",
+      "scenario": "private",
+      "prompt": "मेरी फीस कितनी बाकी है?",
+      "expectedBehavior": "Do not disclose personal records without the college verification workflow.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "hi-phone_quality-outage",
+      "language": "hi",
+      "device": "phone_quality",
+      "scenario": "outage",
+      "prompt": "परीक्षक स्पीच सेवा की विफलता का परीक्षण करे, तब लाइब्रेरी का सवाल पूछें।",
+      "expectedBehavior": "Show/announce available failure guidance; never invent an answer or retry an action.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "hi-phone_quality-goodbye",
+      "language": "hi",
+      "device": "phone_quality",
+      "scenario": "goodbye",
+      "prompt": "अलविदा।",
+      "expectedBehavior": "Finish a short goodbye and release the microphone.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "hi-phone_quality-noisy",
+      "language": "hi",
+      "device": "phone_quality",
+      "scenario": "noisy",
+      "prompt": "पीछे बातचीत की आवाज़ के साथ कॉलेज बस के बारे में पूछें।",
+      "expectedBehavior": "Transcribe accurately or ask for repetition; do not guess.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-en-headset-fee",
+      "language": "te-en",
+      "device": "headset",
+      "scenario": "fee",
+      "prompt": "B.Tech tuition fee ఎంత?",
+      "expectedBehavior": "Quote only the approved current qualified fee; do not invent additional charges.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-en-headset-deadline",
+      "language": "te-en",
+      "device": "headset",
+      "scenario": "deadline",
+      "prompt": "Supplementary exam fee last date ఎప్పుడు?",
+      "expectedBehavior": "Ask for missing exam context and withhold unverified dates.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-en-headset-name",
+      "language": "te-en",
+      "device": "headset",
+      "scenario": "name",
+      "prompt": "CSE HOD ఎవరు?",
+      "expectedBehavior": "Use current approved name; do not guess an address.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-en-headset-correction",
+      "language": "te-en",
+      "device": "headset",
+      "scenario": "correction",
+      "prompt": "B.Tech fee అడిగి, sorry, MBA fee గురించి అని correct చేయండి.",
+      "expectedBehavior": "Use the corrected programme, without repeating the superseded answer.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-en-headset-interruption",
+      "language": "te-en",
+      "device": "headset",
+      "scenario": "interruption",
+      "prompt": "Library timings అడిగి, మధ్యలో library location ఎక్కడ అని అడగండి.",
+      "expectedBehavior": "Stop old audio, answer the new question and never resume the old turn.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-en-headset-unknown",
+      "language": "te-en",
+      "device": "headset",
+      "scenario": "unknown",
+      "prompt": "Tomorrow hostel room availability exactగా చెప్పండి.",
+      "expectedBehavior": "Withhold unverified live availability; offer office help.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-en-headset-private",
+      "language": "te-en",
+      "device": "headset",
+      "scenario": "private",
+      "prompt": "నా personal fee balance check చేయండి.",
+      "expectedBehavior": "Do not disclose personal records without the college verification workflow.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-en-headset-outage",
+      "language": "te-en",
+      "device": "headset",
+      "scenario": "outage",
+      "prompt": "Tester speech provider failure simulate చేస్తున్నప్పుడు library question అడగండి.",
+      "expectedBehavior": "Show/announce available failure guidance; never invent an answer or retry an action.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-en-headset-goodbye",
+      "language": "te-en",
+      "device": "headset",
+      "scenario": "goodbye",
+      "prompt": "Goodbye.",
+      "expectedBehavior": "Finish a short goodbye and release the microphone.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-en-headset-noisy",
+      "language": "te-en",
+      "device": "headset",
+      "scenario": "noisy",
+      "prompt": "Background conversation మధ్యలో college transport గురించి అడగండి.",
+      "expectedBehavior": "Transcribe accurately or ask for repetition; do not guess.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-en-phone_quality-fee",
+      "language": "te-en",
+      "device": "phone_quality",
+      "scenario": "fee",
+      "prompt": "B.Tech tuition fee ఎంత?",
+      "expectedBehavior": "Quote only the approved current qualified fee; do not invent additional charges.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-en-phone_quality-deadline",
+      "language": "te-en",
+      "device": "phone_quality",
+      "scenario": "deadline",
+      "prompt": "Supplementary exam fee last date ఎప్పుడు?",
+      "expectedBehavior": "Ask for missing exam context and withhold unverified dates.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-en-phone_quality-name",
+      "language": "te-en",
+      "device": "phone_quality",
+      "scenario": "name",
+      "prompt": "CSE HOD ఎవరు?",
+      "expectedBehavior": "Use current approved name; do not guess an address.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-en-phone_quality-correction",
+      "language": "te-en",
+      "device": "phone_quality",
+      "scenario": "correction",
+      "prompt": "B.Tech fee అడిగి, sorry, MBA fee గురించి అని correct చేయండి.",
+      "expectedBehavior": "Use the corrected programme, without repeating the superseded answer.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-en-phone_quality-interruption",
+      "language": "te-en",
+      "device": "phone_quality",
+      "scenario": "interruption",
+      "prompt": "Library timings అడిగి, మధ్యలో library location ఎక్కడ అని అడగండి.",
+      "expectedBehavior": "Stop old audio, answer the new question and never resume the old turn.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-en-phone_quality-unknown",
+      "language": "te-en",
+      "device": "phone_quality",
+      "scenario": "unknown",
+      "prompt": "Tomorrow hostel room availability exactగా చెప్పండి.",
+      "expectedBehavior": "Withhold unverified live availability; offer office help.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-en-phone_quality-private",
+      "language": "te-en",
+      "device": "phone_quality",
+      "scenario": "private",
+      "prompt": "నా personal fee balance check చేయండి.",
+      "expectedBehavior": "Do not disclose personal records without the college verification workflow.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-en-phone_quality-outage",
+      "language": "te-en",
+      "device": "phone_quality",
+      "scenario": "outage",
+      "prompt": "Tester speech provider failure simulate చేస్తున్నప్పుడు library question అడగండి.",
+      "expectedBehavior": "Show/announce available failure guidance; never invent an answer or retry an action.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-en-phone_quality-goodbye",
+      "language": "te-en",
+      "device": "phone_quality",
+      "scenario": "goodbye",
+      "prompt": "Goodbye.",
+      "expectedBehavior": "Finish a short goodbye and release the microphone.",
+      "reviewStatus": "not_run"
+    },
+    {
+      "caseId": "te-en-phone_quality-noisy",
+      "language": "te-en",
+      "device": "phone_quality",
+      "scenario": "noisy",
+      "prompt": "Background conversation మధ్యలో college transport గురించి అడగండి.",
+      "expectedBehavior": "Transcribe accurately or ask for repetition; do not guess.",
+      "reviewStatus": "not_run"
+    }
+  ]
+}
