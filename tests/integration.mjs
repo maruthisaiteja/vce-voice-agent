@@ -6,11 +6,12 @@ import {createRequire} from 'node:module';
 import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 const root=process.cwd(),temp=fs.mkdtempSync(path.join(os.tmpdir(),'campus-integration-')),require=createRequire(path.join(root,'package.json'));
+const jose=pathToFileURL(require.resolve('jose')).href,nodemailer=pathToFileURL(require.resolve('nodemailer')).href;
 const zod=pathToFileURL(require.resolve('zod')).href;
-for(const name of ['policy','college-intent','college-data','department-email','store','evaluation','semantic','sarvam','sarvam-agent','voice-budget','integrations','desk']){
+for(const name of ['policy','college-intent','college-data','department-email','store','evaluation','semantic','sarvam','sarvam-agent','voice-budget','integrations','desk','session','smtp']){
  let code=ts.transpileModule(fs.readFileSync(path.join(root,'lib',name+'.ts'),'utf8'),{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}}).outputText;
- code=code.replaceAll("'cloudflare:workers'","'./test-env.mjs'").replaceAll("'zod'",JSON.stringify(zod));
- for(const dep of ['policy','college-intent','college-data','department-email','store','evaluation','semantic','sarvam','sarvam-agent','voice-budget','integrations','desk'])code=code.replaceAll(`'./${dep}'`,`'./${dep}.mjs'`);
+ code=code.replace("import { runtime } from './runtime';","import {env} from './test-env.mjs';const runtime=()=>env;").replaceAll("'jose'",JSON.stringify(jose)).replaceAll("'nodemailer'",JSON.stringify(nodemailer)).replaceAll("'cloudflare:workers'","'./test-env.mjs'").replaceAll("'zod'",JSON.stringify(zod));
+ for(const dep of ['policy','college-intent','college-data','department-email','store','evaluation','semantic','sarvam','sarvam-agent','voice-budget','integrations','desk','session','smtp'])code=code.replaceAll(`'./${dep}'`,`'./${dep}.mjs'`);
  fs.writeFileSync(path.join(temp,name+'.mjs'),code);
 }
 fs.writeFileSync(path.join(temp,'test-env.mjs'),`import {DatabaseSync} from 'node:sqlite';import fs from 'node:fs';
@@ -23,6 +24,8 @@ const staff='staff:owner',svc='service:voice';
 const f={title:'Documents',department:'admissions',topic:'documents',question:'What admission documents should I bring?',answer:'Bring the documents listed in the current approved admission notice.',answerTe:'ప్రస్తుత అడ్మిషన్ నోటీసులో పేర్కొన్న పత్రాలు తీసుకురండి.',answerHi:'वर्तमान प्रवेश सूचना में बताए गए दस्तावेज़ लाएँ।',source:'Synthetic notice',effectiveFrom:'2026-01-01',expiresOn:'2099-01-01',access:'public'};
 try{
  await check('Unauthenticated requests rejected',async()=>assert.equal(await store.getActor(new Request('https://desk.test/api/desk')),null));
+ await check('Public hosting rejects forged platform identity headers',async()=>assert.equal(await store.getActor(new Request('https://desk.test/api/desk',{headers:{'oai-authenticated-user-id':'owner'}})),null));
+ await check('Signed staff sessions authenticate and tampered sessions fail',async()=>{const session=await import(pathToFileURL(path.join(temp,'session.mjs')));const before=process.env.SESSION_SECRET;try{process.env.SESSION_SECRET='synthetic-session-key-at-least-32-characters';const token=await session.createSession();assert.equal(await store.getActor(new Request('https://desk.test/api/desk',{headers:{cookie:'campus_staff='+token}})),'staff:administrator');assert.equal(await session.verifySession('x'+token),null);assert.equal(await session.verifySession(),null);}finally{if(before===undefined)delete process.env.SESSION_SECRET;else process.env.SESSION_SECRET=before;}});
  await check('Invalid service token rejected',async()=>assert.equal(await store.getActor(new Request('https://desk.test/api/desk',{headers:{Authorization:'Bearer wrong'}})),null));
  await check('Valid service token recognized',async()=>assert.equal(await store.getActor(new Request('https://desk.test/api/desk',{headers:{Authorization:'Bearer test-token'}})),svc));
  await check('Cross-origin staff mutation rejected',async()=>assert.equal(store.sameOrigin(new Request('https://desk.test/api/desk',{headers:{Origin:'https://evil.test'}}),staff),false));

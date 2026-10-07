@@ -1,5 +1,6 @@
 import {database,uid,now,runtime,log,redact} from './store';
 import {departmentNames} from './policy';
+import {smtpConfigured,deliverMail} from './smtp';
 export function recipientCurrent(row:any,at=Date.now()){
  const verified=Date.parse(row?.verified_at??''),expires=Date.parse(row?.verified_until??'');
  return !!row?.email&&!!row?.verified_by&&Number.isFinite(verified)&&verified<=at&&Number.isFinite(expires)&&expires>at;
@@ -28,14 +29,16 @@ export async function sendDepartmentEmail(id:string,actor:string){
  if(row.recipient!==directory!.email||row.recipient_name!==directory!.recipient_name)throw new Error('The recipient changed. Prepare a new reviewed draft for the verified address');
  if(!row.consent)throw new Error('Caller consent is required');
  const url=runtime().SMTP_ADAPTER_URL,token=runtime().SMTP_ADAPTER_TOKEN;
- if(!url||!token)return {status:'not_sent',reply:'SMTP is not configured. Your email remains saved and unsent.'};
- if(!url.startsWith('https://'))throw new Error('SMTP adapter requires HTTPS');
+ if(!smtpConfigured()&&(!url||!token))return {status:'not_sent',reply:'SMTP is not configured. Your email remains saved and unsent.'};
+ if(url&&!url.startsWith('https://'))throw new Error('SMTP adapter requires HTTPS');
  // Atomic claim prevents concurrent send clicks. Never retry an ambiguous outcome.
  const claim=await db.prepare("UPDATE email_outbox SET status='sending',updated_at=? WHERE id=? AND status='draft' AND body=? AND subject=? AND reviewed_by=? AND EXISTS (SELECT 1 FROM email_directory d WHERE d.id=email_outbox.department AND d.email=email_outbox.recipient AND d.verified_at=email_outbox.recipient_verified_at AND d.verified_until>?) RETURNING id").bind(now(),id,row.body,row.subject,row.reviewed_by,now()).first();
  if(!claim)return {status:'not_sent',reply:'This draft is not ready to send. Prepare a new draft after recipient verification.'};
  let status='uncertain',detail='Delivery outcome is uncertain. Staff must check the sender mailbox before retrying.';
- try{const res=await fetch(url.replace(/\/$/,'')+'/email/send',{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${token}`,'Idempotency-Key':id},body:JSON.stringify({id,to:row.recipient,subject:row.subject,body:row.body,replyTo:row.reply_to}),signal:AbortSignal.timeout(25000)});
+ try{if(smtpConfigured()){
+   if(await deliverMail({id,to:String(row.recipient),subject:String(row.subject),body:String(row.body),replyTo:String(row.reply_to)})){status='sent';detail='SMTP server accepted the email; inbox delivery is not confirmed.';}else{status='failed';detail='SMTP did not accept this email.';}
+  }else{const res=await fetch(url!.replace(/\/$/,'')+'/email/send',{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${token}`,'Idempotency-Key':id},body:JSON.stringify({id,to:row.recipient,subject:row.subject,body:row.body,replyTo:row.reply_to}),signal:AbortSignal.timeout(25000)});
   if(res.ok){const data:any=await res.json();if(data.status==='sent'){status='sent';detail='SMTP server accepted the email; inbox delivery is not confirmed.';}else if(data.status==='not_configured'||data.status==='failed'){status='failed';detail='SMTP did not accept this email. Review the gateway before retrying.';}}
- }catch{}
+ }}catch{}
  await db.prepare('UPDATE email_outbox SET status=?,detail=?,updated_at=?,sent_at=? WHERE id=?').bind(status,detail,now(),status==='sent'?now():null,id).run();await log(actor,'email.'+status,id,String(row.department));return {status,reply:status==='sent'?'The SMTP server accepted the email. Inbox delivery is not confirmed.':detail};
 }

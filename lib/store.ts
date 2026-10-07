@@ -1,12 +1,15 @@
-import { env } from 'cloudflare:workers';
-export const runtime=()=>env as Cloudflare.Env;
+import {runtime} from './runtime';
+import {sessionCookie,verifySession} from './session';
+export {runtime};
 export function database(){const db=runtime().DB;if(!db)throw new Error('The college database is temporarily unavailable. Please try again.');return db;}
 export const uid=()=>crypto.randomUUID();
 export const now=()=>new Date().toISOString();
 export const redact=(s:string)=>s.replace(/\b\d{10,16}\b/g,'[number redacted]').replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi,'[email redacted]').replace(/\b(?:otp|pin|password)\s*(?:is|:|=)?\s*\S+/gi,'[credential redacted]');
 export async function log(actor:string,action:string,id:string,detail:string){await database().prepare('INSERT INTO audit (id,actor,action,entity_id,detail,created_at) VALUES (?,?,?,?,?,?)').bind(uid(),actor,action,id,redact(detail),now()).run();}
 export async function getActor(req:Request){
- const user=req.headers.get('oai-authenticated-user-id');if(user)return `staff:${user}`;
+ // Public hosting must never trust a caller-supplied identity header.
+ const cookie=req.headers.get('cookie')?.split(';').map(v=>v.trim()).find(v=>v.startsWith(sessionCookie+'='))?.slice(sessionCookie.length+1);
+ const staff=await verifySession(cookie);if(staff)return staff;
  const token=runtime().DESK_SERVICE_TOKEN;const supplied=req.headers.get('authorization')?.replace(/^Bearer /,'');
  if(token&&supplied){const a=new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(token))),b=new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(supplied)));let n=0;for(let i=0;i<a.length;i++)n|=a[i]^b[i];if(!n)return 'service:voice';}
  return null;

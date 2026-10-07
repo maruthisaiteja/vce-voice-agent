@@ -1,10 +1,18 @@
 {
-  "passed": 89,
-  "total": 89,
+  "passed": 91,
+  "total": 91,
   "scope": "Backend actions against real SQLite with D1-shaped adapter; no live vendors",
   "results": [
     {
       "name": "Unauthenticated requests rejected",
+      "passed": true
+    },
+    {
+      "name": "Public hosting rejects forged platform identity headers",
+      "passed": true
+    },
+    {
+      "name": "Signed staff sessions authenticate and tampered sessions fail",
       "passed": true
     },
     {
