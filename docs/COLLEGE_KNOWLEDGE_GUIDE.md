@@ -18,6 +18,14 @@ For revised notices, withdraw the old document and upload its replacement. **Wit
 
 This is source-grounded retrieval, not model-weight training. The call model selects from current approved answers; it must not invent college facts. Uploading alone does not make every sentence answerable. The library is a bounded pilot workflow: for very large collections, plan background ingestion and indexed multilingual retrieval with measured recall/latency before promising complete coverage.
 
+## Prepare answers for natural department enquiries
+
+For each department, create an approved introductory answer with **Topic key** `department-overview` and the correct **Department**. Use a short, sourced introduction, ending with one question such as “Would you like admissions, fees, subjects, or faculty details?” Keep the entire answer within 55 words. Add checked Telugu and Hindi versions for those callers. Only one current overview should be active per department; conflicting versions are withheld.
+
+Broad questions such as “Give me full details about Information Technology” use this overview. Without an approved overview, the agent asks which topic the caller wants instead of immediately escalating. Short follow-ups such as “fees” or “subjects” inherit the branch from the preceding enquiry. Explicit changes to another branch take precedence.
+
+Create separate approved answers for fees, curriculum, admissions, faculty, scholarships, examinations and placements. Include the programme, academic year, semester, category and exceptions in the matching question and answer whenever they affect the result. Do not put an entire handbook into one spoken answer. Test broad enquiries, short follow-ups, a changed branch, expired notices and questions that the documents do not answer. Uploading documents alone still does not approve their contents.
+
 ## Add department mail addresses
 
 1. Open **Department emails** → **HOD & office recipients**.

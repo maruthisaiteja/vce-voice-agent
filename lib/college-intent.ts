@@ -12,6 +12,13 @@ export function branchOf(q:string){q=normalizeQuestion(q);
  return '';
 }
 export function programmeOf(q:string){q=normalizeQuestion(q);if(/m[.\s-]?tech|postgraduate engineering/iu.test(q))return 'mtech';if(/\bmba\b|business administration/iu.test(q))return 'mba';if(/b[.\s-]?tech|undergraduate engineering/iu.test(q)||branchOf(q))return 'btech';return '';}
+// A request for an entire department is a navigation turn, not permission to
+// substitute a fee, intake or HOD fact for a complete overview.
+export function broadBranch(q:string){
+ const b=branchOf(q);if(!b)return '';
+ if(/fee|tuition|seats|intake|hod|faculty|subject|syllabus|curriculum|eligib|admission|placement|scholarship|deadline|date|ఫీజు|సీట్లు|విషయ|फीस|सीट|पाठ्यक्रम/iu.test(q))return '';
+ return /detail|overview|tell me about|know about|information (about|on)|explain|వివర|గురించి|जानकारी|बारे/iu.test(q)?b:'';
+}
 // These intents select only curated source topics; they never create a factual answer.
 export function collegeIntent(q:string):{topic?:string;clarify?:'programme'|'branch';department?:string}|null{
  q=normalizeQuestion(q);const p=programmeOf(q),b=branchOf(q);
@@ -49,6 +56,9 @@ export function collegeIntent(q:string):{topic?:string;clarify?:'programme'|'bra
 }
 export function contextualQuestion(question:string,lastQuestion:string,previousReply:string){
  const q=question.trim();
+ // Inherit a department only for a short menu selection. An explicit new
+ // branch always wins; an unrelated new question never inherits it.
+ if(!branchOf(q)&&branchOf(lastQuestion)&&q.split(/\s+/u).length<=10&&/^(?:(?:and|what about|tell me about|its|the|okay|please)\s+)*(?:fees?|tuition|subjects?|syllabus|curriculum|faculty|admissions?|eligibility|seats|intake|hod|placements?|scholarships?|ఫీజు|సీట్లు|అడ్మిషన్|విషయాలు|फीस|विषय|प्रवेश)(?:\s+(?:please|details))?[.!?]*$/iu.test(q))return `${q} ${branchOf(lastQuestion)==='it'?'Information Technology':branchOf(lastQuestion)}`;
  // Inherit scope only for elliptical follow-ups, never overwrite an explicit new scope.
  if(/^(and |what about |how about |మరి |और )/iu.test(q)&&programmeOf(q)&&/fee|tuition|ఫీజు|फीस/iu.test(lastQuestion))return `tuition fee ${q}`;
  if(/^(what about |and |how about )/iu.test(q)&&branchOf(q)&&/hod|head.{0,15}department/iu.test(lastQuestion))return `HOD ${q}`;

@@ -1,6 +1,6 @@
 {
-  "passed": 93,
-  "total": 93,
+  "passed": 98,
+  "total": 98,
   "scope": "Backend actions against real SQLite with D1-shaped adapter; no live vendors",
   "results": [
     {
@@ -33,6 +33,26 @@
     },
     {
       "name": "Staff can create draft",
+      "passed": true
+    },
+    {
+      "name": "Reported IT call asks a relevant question and logs IT routing",
+      "passed": true
+    },
+    {
+      "name": "Department menu preserves short follow-ups and explicit scope changes",
+      "passed": true
+    },
+    {
+      "name": "Department broad enquiries support Telugu and Hindi without inventing facts",
+      "passed": true
+    },
+    {
+      "name": "Approved overview is exact and draft private expired or conflicting overviews are withheld",
+      "passed": true
+    },
+    {
+      "name": "Broad wording cannot bypass private record or staff decision rules",
       "passed": true
     },
     {
