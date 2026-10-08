@@ -1,6 +1,6 @@
 {
-  "passed": 109,
-  "total": 109,
+  "passed": 119,
+  "total": 119,
   "scope": "Backend actions against real SQLite with D1-shaped adapter; no live vendors",
   "results": [
     {
@@ -285,6 +285,46 @@
     },
     {
       "name": "College caller: What is the B.Tech scholarship eligibility?",
+      "passed": true
+    },
+    {
+      "name": "College caller: What is the total fee for B.Tech per year?",
+      "passed": true
+    },
+    {
+      "name": "College caller: EPZ college code",
+      "passed": true
+    },
+    {
+      "name": "College caller: Where can I check my results? The link isn't opening",
+      "passed": true
+    },
+    {
+      "name": "College caller: What is the cutoff rank for CSE?",
+      "passed": true
+    },
+    {
+      "name": "College caller: What is the difference between CSE and AI ML?",
+      "passed": true
+    },
+    {
+      "name": "College caller: Do you accept fee reimbursement?",
+      "passed": true
+    },
+    {
+      "name": "College caller: Can I get a fee receipt for bank loan?",
+      "passed": true
+    },
+    {
+      "name": "College caller: What is the lateral entry process?",
+      "passed": true
+    },
+    {
+      "name": "College caller: Is Vardhaman NAAC accredited?",
+      "passed": true
+    },
+    {
+      "name": "College caller: one lakh forty thousand per year",
       "passed": true
     },
     {

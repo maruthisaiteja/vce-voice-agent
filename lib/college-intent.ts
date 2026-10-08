@@ -1,6 +1,6 @@
-export function normalizeQuestion(q:string){return q.replace(/బీటెక్|బి[ .-]?టెక్|बी[ .-]?टेक/gu,'B.Tech').replace(/ఎం[ .-]?టెక్|ఎంటెక్|एम[ .-]?टेक/gu,'M.Tech').replace(/ఎంబీఏ|ఎం[ .-]?బి[ .-]?ఏ|एमबीए/gu,'MBA').replace(/సీఎస్ఈ|సి[ .-]?ఎస్[ .-]?ఈ|सीएसई/gu,'CSE').replace(/ఈసీఈ|ఈ[ .-]?సి[ .-]?ఈ|ईसीई/gu,'ECE').replace(/ఈఈఈ|ईईई/gu,'EEE').replace(/ఐటీ|आईटी/gu,'Information Technology');}
+export function normalizeQuestion(q:string){return q.replace(/బీటెక్|బి[ .-]?టెక్|बी[ .-]?टेक/gu,'B.Tech').replace(/ఎం[ .-]?టెక్|ఎంటెక్|एम[ .-]?टेक/gu,'M.Tech').replace(/ఎంబీఏ|ఎం[ .-]?బి[ .-]?ఏ|एमबीए/gu,'MBA').replace(/సీఎస్ఈ|సి[ .-]?ఎస్[ .-]?ఈ|सीएसई/gu,'CSE').replace(/ఈసీఈ|ఈ[ .-]?సి[ .-]?ఈ|ईसीई/gu,'ECE').replace(/ఈఈఈ|ईईई/gu,'EEE').replace(/ఐటీ|आईटी/gu,'Information Technology').replace(/\b(epz|epcet|e-p-z|eamcet|amcet|tgeamcet|tgeapcet)\b/gi,'EAPCET').replace(/\b(pgset|pg-cet|pg-set|tgpgecet)\b/gi,'PGECET').replace(/\b(iset|i-set|tgicet)\b/gi,'ICET').replace(/\b(vmeg|vmag|w-m-e-g)\b/gi,'VMEG').replace(/\b(aml|ai-ml)\b/gi,'AIML');}
 export function branchOf(q:string){q=normalizeQuestion(q);
- if(/\b(ai.?ml|artificial intelligence|machine learning)\b/iu.test(q))return 'cseaiml';
+ if(/\b(ai.?ml|artificial intelligence|machine learning|aiml)\b/iu.test(q))return 'cseaiml';
  if(/data.?science|\bcseds\b|\bcse.?ds\b/iu.test(q))return 'cseds';
  if(/\bcse\b|computer science/iu.test(q))return 'cse';
  if(/information technology/iu.test(q)||/\bIT\b/u.test(q))return 'it';
@@ -22,6 +22,15 @@ export function broadBranch(q:string){
 // These intents select only curated source topics; they never create a factual answer.
 export function collegeIntent(q:string):{topic?:string;clarify?:'programme'|'branch'|'exam-rules';department?:string}|null{
  q=normalizeQuestion(q);const p=programmeOf(q),b=branchOf(q);
+ if(/autonomous|accredit|naac|nba|affiliated|affiliation|which university/iu.test(q))return {topic:'accreditation',department:'general'};
+ if(/cut.?off|cutoff|closing.?rank|last.?rank|\brank\b/iu.test(q)&&/eapcet|pgecet|icet|admission|seat|cse|btech|can i get|my son|got around|cutoff|last year/iu.test(q))return {topic:'cutoffs',department:'admissions'};
+ if(/(difference|compare|which has more seats)/iu.test(q)&&/cse/iu.test(q)&&/(ai|ml|data.?science|ds|aiml)/iu.test(q))return {topic:'branch-diff',department:'admissions'};
+ if(/hostel/iu.test(q)&&/transport|bus/iu.test(q)&&/fee|cost|separate|include/iu.test(q))return {topic:'hostel-transport-fees',department:'accounts'};
+ if(/reimburse|epass|scholarship/iu.test(q)&&/fee|how much|pay|from our side|dues/iu.test(q))return {topic:'fee-reimbursement',department:'accounts'};
+ if(/loan|receipt/iu.test(q)&&/fee|bank|estimation/iu.test(q))return {topic:'fee-loan-receipt',department:'accounts'};
+ if(/late.?fine|late.?fee|penalty/iu.test(q)||(/last.?date/iu.test(q)&&/over|fine|penalty/iu.test(q)))return {topic:'fee-late',department:'accounts'};
+ if(/provisional|certificate|bonafide|marks memo|cmm|migration/iu.test(q)&&!/calendar|timetable/iu.test(q)&&/provisional|cmm|graduation/iu.test(q))return {topic:'certificates',department:'exams'};
+ if(/lateral|diploma/iu.test(q)&&/ecet|entry|admission|join|second.?year|2nd.?year/iu.test(q))return {topic:'lateral-entry',department:'admissions'};
  // Student branches are professional societies, never degree programmes.
  if(/student.?branch|student.?chapter|professional societ|\bieee\b|\bacm\b/iu.test(q))return /join|fee|register|event|date|when|today|tomorrow/iu.test(q)?null:{topic:'student-chapters'};
  if(/club|co.?curricular|extra.?curricular/iu.test(q))return /join|fee|register|president|coordinator|date|when|today|tomorrow/iu.test(q)?null:{topic:'student-clubs'};
@@ -33,15 +42,15 @@ export function collegeIntent(q:string):{topic?:string;clarify?:'programme'|'bra
  if(/admission/iu.test(q)&&p==='btech'&&/detail|process|how|apply/iu.test(q)&&!/contact|phone|fee|deadline|date|when|document|scholarship|rank|cut.?off|eligib|category|quota|lateral/iu.test(q))return {topic:'admission-process-btech',department:'admissions'};
  if(/\b(and|also|plus)\b|మరియు|और/iu.test(q)&&/fee|ఫీజు|फीस/iu.test(q)&&/hostel|placement|transport|\bseats\b|intake/iu.test(q))return null;
  if(/hostel|హాస్టల్|हॉस्टल/iu.test(q)){if(/fee|cost|price|vacan|available|ఫీజు|खाली|शुल्क/iu.test(q))return null;return /facilit|accommod|wifi|laundry|security|is there|do you have|హాస్టల్ ఉందా|हॉस्टल है/iu.test(q)?{topic:'hostel-facilities'}:null;}
- if(/exam|hall.?ticket|result|పరీక్ష|परीक्षा|రెగ్యులర్|supplementary/iu.test(q)){if(/deadline|date|fee|when|marks|తేదీ|అంతిమ|अंतिम|कब/iu.test(q))return null;return {topic:'exams-portal'};}
+ if((/exam|hall.?ticket|result|పరీక్ష|परीक्षा|రెగ్యులర్|supplementary/iu.test(q))&&!/entrance.?exam|entrance.?test|admissions?/iu.test(q)){if(/deadline|date|fee|when|marks|తేదీ|అంతిమ|अंतिम|कब/iu.test(q))return null;return {topic:'exams-portal'};}
  if(/\bfee|tuition|ఫీజు|ఫీజ|फीस|शुल्क/iu.test(q)){
-  if(/deadline|last.?date|due|refund|scholarship|reimburse|discount|total.{0,15}(cost|fee)|four.?year|4.?year/iu.test(q))return null;
-  if(/pay.{0,30}(online|link|portal)|online.{0,20}(pay|fee)|payment.{0,15}(link|portal)|ఫీజు.{0,10}ఎలా|ऑनलाइन/iu.test(q))return {topic:'payment-link'};
+  if(/deadline|last.?date|due|refund|discount/iu.test(q)&&!/total|annual|per.?year/iu.test(q))return null;
+  if(/pay.{0,30}(online|link|portal)|online.{0,20}(pay|fee)|payment.{0,15}(link|portal)|fee.{0,15}(online|link|portal)|ఫీజు.{0,10}ఎలా|ऑनलाइन/iu.test(q))return {topic:'payment-link'};
   return p?{topic:'fee-'+p}:{clarify:'programme',department:'accounts'};
  }
  if(/intake|seats|సీట్లు|సీటు|सीट/iu.test(q)){if(/available|remaining|vacan|ఖాళీ|खाली/iu.test(q))return null;return b?{topic:'intake-'+b}:{clarify:'branch',department:'admissions'};}
  if(/hod|head.{0,15}department|హెచ్.?ఓ.?డి|विभागाध्यक्ष/iu.test(q)){if(/email|e-mail|mail|phone|number|office|room/iu.test(q))return null;return b?{topic:'hod-'+b,department:b}:{clarify:'branch',department:'academics'};}
- if(/eligib|requirement|qualification|అర్హత|पात्रता/iu.test(q)){if(/scholarship|placement|hostel|quota|rank/iu.test(q))return null;return p?{topic:'eligibility-'+p}:{clarify:'programme',department:'admissions'};}
+ if(/eligib|requirement|qualification|entrance|అర్హత|पात्रता/iu.test(q)){if(/scholarship|placement|hostel|quota|rank/iu.test(q))return null;return p?{topic:'eligibility-'+p}:{clarify:'programme',department:'admissions'};}
  if(/category.?b|management.?quota|మేనేజ్|मैनेजमेंट/iu.test(q))return /deadline|last.?date|when|తేదీ|अंतिम/iu.test(q)?null:{topic:'category-b'};
  if(/library|లైబ్రరీ|पुस्तकालय/iu.test(q)){
   if(/issue|return|circulation/iu.test(q)&&/time|hour|when/iu.test(q))return {topic:'library-circulation'};
@@ -55,7 +64,7 @@ export function collegeIntent(q:string):{topic?:string;clarify?:'programme'|'bra
  if(/health.?cent|doctor|first.?aid|infirmary|మెడికల్|డాక్టర్|डॉक्टर/iu.test(q))return /is there|facility|facilities|available|ఉన్నారా|ఉందా|है/iu.test(q)?{topic:'health'}:null;
  if(/calendar|timetable|క్యాలెండర్|कैलेंडर/iu.test(q))return /date|when|start|తేదీ|कब/iu.test(q)?null:{topic:'calendar'};
  if(/student.{0,12}(login|portal)|students.?corner/iu.test(q))return {topic:'student-login'};
- if(/counselling.?code|counseling.?code|eapcet.?code|ecet.?code|icet.?code|కోడ్|कोड/iu.test(q))return {topic:'code'};
+ if(/counselling.?code|counseling.?code|eapcet.?code|ecet.?code|icet.?code|web.?option|college.?code|కోడ్|कोड/iu.test(q)||(/code|కోడ్|कोड/iu.test(q)&&/college|vmeg|eapcet|ecet|icet|web/iu.test(q)))return {topic:'code'};
  if(/admission|డ్మిష|प्रवेश/iu.test(q)&&/contact|phone|dean|number|సంప్రద|నంబర్|संपर्क/iu.test(q))return {topic:'admissions-contact'};
  if(/where.{0,25}(college|campus|vardhaman)|college.{0,12}(address|location)|campus.{0,12}(address|location)|^(what is the )?address\??$|కాలేజీ.{0,10}ఎక్కడ|చిరునామా|पता|कॉलेज.{0,10}कहाँ/iu.test(q))return {topic:'address'};
  if(/main.{0,15}(phone|number|contact)|college.{0,15}(phone|number|contact)/iu.test(q))return {topic:'phone'};

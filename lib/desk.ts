@@ -23,6 +23,10 @@ export async function seed(){const db=database();await db.batch([
  if(!reviewed)await db.batch([
  ...callReviewFacts.map(f=>db.prepare('INSERT OR IGNORE INTO knowledge (id,title,department,topic,question,answer,answer_te,answer_hi,source,status,access,effective_from,expires_on,approved_by,approved_at,updated_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(f.id,f.title,f.department,f.topic,f.question,f.answer,f.answerTe,f.answerHi,f.source,f.status,f.access,f.effectiveFrom,f.expiresOn,f.approvedBy,f.approvedAt,now())),
  db.prepare("INSERT OR IGNORE INTO settings (id,value) VALUES ('call-review-2026-10-08',?)").bind(now())]);
+ const conversational=await db.prepare("SELECT id FROM settings WHERE id='conversational-v3-loaded'").first();
+ if(!conversational)await db.batch([
+ ...callReviewFacts.map(f=>db.prepare('INSERT OR IGNORE INTO knowledge (id,title,department,topic,question,answer,answer_te,answer_hi,source,status,access,effective_from,expires_on,approved_by,approved_at,updated_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(f.id,f.title,f.department,f.topic,f.question,f.answer,f.answerTe,f.answerHi,f.source,f.status,f.access,f.effectiveFrom,f.expiresOn,f.approvedBy,f.approvedAt,now())),
+ db.prepare("INSERT OR IGNORE INTO settings (id,value) VALUES ('conversational-v3-loaded',?)").bind(now())]);
  }
 export async function config(){await seed();const row=await database().prepare('SELECT value FROM settings WHERE id=?').bind('config').first<{value:string}>();return JSON.parse(row!.value);}
 export async function facts(){const {results}=await database().prepare('SELECT id,title,department,topic,question,answer,answer_te AS answerTe,answer_hi AS answerHi,source,status,access,effective_from AS effectiveFrom,expires_on AS expiresOn,approved_by AS approvedBy,approved_at AS approvedAt,updated_at AS updatedAt FROM knowledge ORDER BY updated_at DESC').all();return results as unknown as Fact[];}

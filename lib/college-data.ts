@@ -82,6 +82,42 @@ add('exam-process','exams','How examinations are administered','How are examinat
  'The Examination Branch handles scheduling, hall tickets, evaluation and results under the college’s autonomous examination system. Specific assessment rules depend on the applicable regulations. Which programme and year are you asking about?',
  'కాలేజీ స్వయంప్రతిపత్తి పరీక్ష విధానంలో Examination Branch షెడ్యూల్, హాల్ టికెట్లు, మూల్యాంకనం, ఫలితాలను నిర్వహిస్తుంది. మూల్యాంకన నియమాలు వర్తించే రెగ్యులేషన్స్‌పై ఆధారపడతాయి. ఏ కోర్సు, సంవత్సరం గురించి అడుగుతున్నారు?',
  'कॉलेज की स्वायत्त परीक्षा प्रणाली में Examination Branch समय-सारणी, हॉल टिकट, मूल्यांकन और परिणाम संभालता है। मूल्यांकन के नियम लागू विनियमों पर निर्भर हैं। किस पाठ्यक्रम और वर्ष की बात कर रहे हैं?', 'https://examination.vardhaman.org/',true);
+add('accreditation','general','Autonomous status and accreditation','Is Vardhaman college autonomous which university NAAC NBA accredited degree?',
+ 'Yes, Vardhaman is UGC autonomous, affiliated with JNTU Hyderabad, accredited with NAAC A++ grade, and its eligible programmes are accredited by NBA Tier-One.',
+ 'అవును, వర్ధమాన్ UGC స్వయంప్రతిపత్తి కలిగినది, JNTU హైదరాబాద్‌కు అనుబంధంగా ఉంది, NAAC A++ గ్రేడ్ మరియు NBA టైర్-1 గుర్తింపు పొందింది.',
+ 'हाँ, वर्धमान यूजीसी स्वायत्त है, जेएनटीयू हैदराबाद से संबद्ध है, नैक ए++ ग्रेड प्राप्त है, और इसके पात्र कार्यक्रम एनबीए टियर-वन से मान्यता प्राप्त हैं।',root,true);
+add('cutoffs','admissions','EAPCET rank and cutoffs guidance','What is EAPCET cutoff last year rank 12000 15000 can I get CSE seat?',
+ 'Cutoffs vary each year by category and counselling rounds. For previous closing ranks or admission guidance, you can speak directly with our Dean of Admissions, Dr. Santosh Reddy, at +91 9014350450.',
+ 'కటాఫ్‌లు కేటగిరీ, కౌన్సెలింగ్ రౌండ్ల ప్రకారం ప్రతి సంవత్సరం మారుతాయి. మునుపటి ర్యాంకుల వివరాల కోసం మా డీన్ డాక్టర్ సంతోష్ రెడ్డిని +91 9014350450 లో సంప్రదించవచ్చు.',
+ 'कटऑफ हर साल श्रेणी और काउंसलिंग राउंड के अनुसार बदलते हैं। पिछले कटऑफ या प्रवेश मार्गदर्शन के लिए आप हमारे डीन डॉ. संतोष रेड्डी से +91 9014350450 पर बात कर सकते हैं।',root+'admissions-contact/',true);
+add('branch-diff','admissions','Difference between CSE AI ML and Data Science','What is the difference between CSE AIML and Data Science which has more seats compare?',
+ 'CSE has 540 seats, while AI and ML and Data Science each have 180 seats. CSE covers broad computing fundamentals, while the specialisations focus deeper on machine learning or analytics.',
+ 'CSE లో 540 సీట్లు ఉన్నాయి; AI & ML మరియు Data Science లో ఒక్కొక్కటి 180 సీట్లు. CSE కంప్యూటింగ్ బేసిక్స్ నేర్పిస్తుంది, స్పెషలైజేషన్లు మెషిన్ లెర్నింగ్ లేదా అనలిటిక్స్‌పై దృష్టి పెడతాయి.',
+ 'CSE में 540 सीटें हैं, जबकि AI और ML तथा Data Science में 180-180 सीटें हैं। CSE बुनियादी कंप्यूटिंग सिखाता है, जबकि विशेषज्ञता मशीन लर्निंग या एनालिटिक्स पर केंद्रित है।',root+'programmes/',true);
+add('fee-reimbursement','accounts','Fee reimbursement scheme and student dues','We have fee reimbursement scheme how much to pay from our side epass scholarship?',
+ 'Under government fee reimbursement, the sanctioned tuition fee is covered by the government. Students only pay university and special institutional charges. The Accounts Office confirms batch-specific dues.',
+ 'ఫీజు రీయింబర్స్‌మెంట్ కింద మంజూరైన ట్యూషన్ ఫీజును ప్రభుత్వం భరిస్తుంది. విద్యార్థులు యూనివర్సిటీ, ప్రత్యేక ఫీజులు మాత్రమే చెల్లిస్తారు. ఖచ్చితమైన బకాయిలను అకౌంట్స్ ఆఫీస్ నిర్ధారిస్తుంది.',
+ 'फीस प्रतिपूर्ति के तहत स्वीकृत ट्यूशन फीस सरकार देती है। छात्रों को केवल विश्वविद्यालय और विशेष शुल्क देना होता है। बाकी बकाया राशि अकाउंट्स ऑफिस बताता है।',root+'programmes/',true);
+add('fee-loan-receipt','accounts','Tuition fee receipt and estimation for education loan','How to get fee receipt for education loan bank estimation letter days?',
+ 'The Accounts section issues tuition fee receipts and estimation letters for bank education loans. You can collect them directly from the Accounts counter in the Administrative Block.',
+ 'బ్యాంక్ ఎడ్యుకేషన్ లోన్ కోసం ఫీజు రసీదులు, ఎస్టిమేషన్ లెటర్లను అకౌంట్స్ విభాగం ఇస్తుంది. అడ్మినిస్ట్రేటివ్ బ్లాక్‌లోని అకౌంట్స్ కౌంటర్ నుంచి వీటిని పొందవచ్చు.',
+ 'एजुकेशन लोन के लिए फीस रसीद और एस्टीमेशन लेटर अकाउंट्स विभाग जारी करता है। आप प्रशासनिक ब्लॉक में अकाउंट्स काउंटर से इसे ले सकते हैं।',root,true);
+add('hostel-transport-fees','accounts','Hostel and transport fees separation','Is there a separate fee for hostel and transport bus does BTech fee include hostel?',
+ 'Yes, hostel accommodation and college bus transport charges are completely separate from tuition fees. Room rates and bus fares depend on the chosen room type and pickup route.',
+ 'అవును, హాస్టల్ మరియు కాలేజీ బస్సు ఛార్జీలు ట్యూషన్ ఫీజుకు అదనంగా ఉంటాయి. గది రకం, బస్సు పికప్ రూట్ ఆధారంగా ఈ ఫీజులు ఉంటాయి.',
+ 'हाँ, हॉस्टल और कॉलेज बस का शुल्क ट्यूशन फीस से अलग है। यह कमरे के प्रकार और बस स्टॉप के मार्ग पर निर्भर करता है।',root+'hostels/',true);
+add('fee-late','accounts','Semester fee deadline and late fine','Last date for semester fee is over is there late fine penalty who to contact?',
+ 'Late fee policies and deadlines are published on the college notice board each semester. For fine waivers or payment extensions, please consult the Accounts Office directly.',
+ 'ఆలస్య రుసుము విధానాలు, గడువులు ప్రతి సెమిస్టర్‌లో నోటీస్ బోర్డుపై ప్రకటిస్తారు. మినహాయింపులు లేదా పొడిగింపు కోసం అకౌంట్స్ ఆఫీసును సంప్రదించండి.',
+ 'विलंब शुल्क और अंतिम तिथि हर सेमेस्टर नोटिस बोर्ड पर दी जाती है। छूट या समय बढ़ाने के लिए सीधे अकाउंट्स ऑफिस से संपर्क करें।',root,true);
+add('lateral-entry','admissions','Diploma lateral entry ECET admissions','Diploma lateral entry ECET BTech second year joining code?',
+ 'Diploma holders can join B.Tech second year through TGECET lateral entry counselling under code VMEG. The Admissions Office can verify branch-wise vacant seats.',
+ 'డిప్లొమా పూర్తి చేసిన విద్యార్థులు TGECET కౌన్సెలింగ్ ద్వారా VMEG కోడ్‌తో B.Tech రెండవ సంవత్సరంలో చేరవచ్చు. ఖాళీ సీట్ల వివరాలను అడ్మిషన్స్ తెలియజేస్తుంది.',
+ 'डिप्लोमा धारक TGECET काउंसलिंग के जरिए कोड VMEG के तहत B.Tech दूसरे वर्ष में प्रवेश ले सकते हैं। खाली सीटों की जानकारी प्रवेश कार्यालय देगा।',root+'programmes/',true);
+add('certificates','exams','Provisional certificate and marks memo issuance','How to get provisional certificate CMM after graduation bonafide?',
+ 'Provisional Certificates and Consolidated Marks Memos are issued by the Examination Branch after clearing all semester exams and submitting the clearance form.',
+ 'అన్ని సెమిస్టర్ పరీక్షలు ఉత్తీర్ణులై, నో-డ్యూస్ ఫారమ్ సమర్పించిన తర్వాత ఎగ్జామినేషన్ బ్రాంచ్ ప్రొవిజనల్ సర్టిఫికెట్, CMM జారీ చేస్తుంది.',
+ 'सभी सेमेस्टर परीक्षाएं उत्तीर्ण करने और नो-ड्यूज जमा करने के बाद परीक्षा शाखा प्रोविजनल सर्टिफिकेट और कंसॉलिडेटेड मार्क्स मेमो जारी करती है।','https://examination.vardhaman.org/',true);
 export const callReviewFacts=rows.slice(reviewStart);
 for(const f of callReviewFacts){f.effectiveFrom='2026-10-08';f.approvedAt='2026-10-08T00:00:00Z';f.expiresOn='2026-11-07';}
 export const collegeFacts=rows;
