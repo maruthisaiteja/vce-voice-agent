@@ -1,6 +1,6 @@
 {
-  "passed": 91,
-  "total": 91,
+  "passed": 93,
+  "total": 93,
   "scope": "Backend actions against real SQLite with D1-shaped adapter; no live vendors",
   "results": [
     {
@@ -365,6 +365,14 @@
     },
     {
       "name": "Sarvam end hook is idempotent and blocks later answers",
+      "passed": true
+    },
+    {
+      "name": "Document answers require active provenance and bounded validity",
+      "passed": true
+    },
+    {
+      "name": "Knowledge collection no longer drops records after 500",
       "passed": true
     }
   ]
