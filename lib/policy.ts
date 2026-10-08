@@ -38,7 +38,7 @@ export function decide(q:string,facts:Fact[],lang:Language='en',now=new Date().t
  }
  if(patterns.filter(([,p])=>p.test(q)).length>1&&/\band\b|\balso\b|మరియు|और/iu.test(q))return out('clarify',l.multi,'Several departments; ask one question');
  const intent=collegeIntent(q);
- if(intent?.clarify){const lines={en:{programme:'Which programme: B.Tech, M.Tech or MBA?',branch:'Which branch do you mean?'},te:{programme:'ఏ కోర్సు: B.Tech, M.Tech లేదా MBA?',branch:'ఏ బ్రాంచ్ గురించి అడుగుతున్నారు?'},hi:{programme:'कौन सा पाठ्यक्रम: B.Tech, M.Tech या MBA?',branch:'कौन सी शाखा की बात कर रहे हैं?'}};return {...out('clarify',lines[lang][intent.clarify],'Programme or branch is required'),department:intent.department??department};}
+ if(intent?.clarify){const lines={en:{programme:'Which programme: B.Tech, M.Tech or MBA?',branch:'Which branch do you mean?','exam-rules':'Which programme, year and regulation are you studying under?'},te:{programme:'ఏ కోర్సు: B.Tech, M.Tech లేదా MBA?',branch:'ఏ బ్రాంచ్ గురించి అడుగుతున్నారు?','exam-rules':'ఏ కోర్సు, సంవత్సరం, రెగ్యులేషన్‌లో చదువుతున్నారు?'},hi:{programme:'कौन सा पाठ्यक्रम: B.Tech, M.Tech या MBA?',branch:'कौन सी शाखा की बात कर रहे हैं?','exam-rules':'आप किस पाठ्यक्रम, वर्ष और विनियम के अंतर्गत पढ़ रहे हैं?'}};return {...out('clarify',lines[lang][intent.clarify],'Programme or branch is required'),department:intent.department??department};}
  if(intent?.topic){const topic='vce-'+intent.topic,candidates=facts.filter(f=>f.topic===topic);const active=candidates.filter(f=>validFact(f,now));
   if(!active.length)return out('escalate',l.missing,'Matching source is draft, expired, future, or private');
   if(new Set(active.map(f=>f.answer.trim())).size>1)return out('escalate',l.conflict,'Conflicting active approved sources');

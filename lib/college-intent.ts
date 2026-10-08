@@ -17,11 +17,20 @@ export function programmeOf(q:string){q=normalizeQuestion(q);if(/m[.\s-]?tech|po
 export function broadBranch(q:string){
  const b=branchOf(q);if(!b)return '';
  if(/fee|tuition|seats|intake|hod|faculty|subject|syllabus|curriculum|eligib|admission|placement|scholarship|deadline|date|ఫీజు|సీట్లు|విషయ|फीस|सीट|पाठ्यक्रम/iu.test(q))return '';
- return /detail|overview|tell me about|know about|information (about|on)|explain|వివర|గురించి|जानकारी|बारे/iu.test(q)?b:'';
+ return /detail|overview|tell me about|know about|information (about|on)|explain|వివర|గురించి|जानकारी|बारे/iu.test(q)||/^(information technology|IT|CSE|ECE|EEE|civil|mechanical)( branch)?[.!?]*$/iu.test(q.trim())?b:'';
 }
 // These intents select only curated source topics; they never create a factual answer.
-export function collegeIntent(q:string):{topic?:string;clarify?:'programme'|'branch';department?:string}|null{
+export function collegeIntent(q:string):{topic?:string;clarify?:'programme'|'branch'|'exam-rules';department?:string}|null{
  q=normalizeQuestion(q);const p=programmeOf(q),b=branchOf(q);
+ // Student branches are professional societies, never degree programmes.
+ if(/student.?branch|student.?chapter|professional societ|\bieee\b|\bacm\b/iu.test(q))return /join|fee|register|event|date|when|today|tomorrow/iu.test(q)?null:{topic:'student-chapters'};
+ if(/club|co.?curricular|extra.?curricular/iu.test(q))return /join|fee|register|president|coordinator|date|when|today|tomorrow/iu.test(q)?null:{topic:'student-clubs'};
+ if(/exam/iu.test(q)&&/conduct|evaluation|assessment|how.*work/iu.test(q))return /marks|weight|pass|percentage|regulation|pattern/iu.test(q)?{clarify:'exam-rules',department:'exams'}:{topic:'exam-process'};
+ if(/exam/iu.test(q)&&/marks|weight|pass|percentage|regulation|pattern/iu.test(q))return /\br\d|semester|year/iu.test(q)?null:{clarify:'exam-rules',department:'exams'};
+ if(b==='it'&&/hod|head.{0,15}department/iu.test(q)&&/phone|contact number|mobile/iu.test(q)&&!/email|mail/iu.test(q))return {topic:'it-hod-phone',department:'it'};
+ if(b==='it'&&/faculty/iu.test(q)&&!/email|phone|contact|salary|recruit|vacan|all|list|each/iu.test(q))return {topic:'it-faculty',department:'it'};
+ if(b==='it'&&/subject|curriculum|syllabus/iu.test(q)&&!/semester|regulation|\br\d|year|exam|credit/iu.test(q))return {topic:'it-study',department:'it'};
+ if(/admission/iu.test(q)&&p==='btech'&&/detail|process|how|apply/iu.test(q)&&!/contact|phone|fee|deadline|date|when|document|scholarship|rank|cut.?off|eligib|category|quota|lateral/iu.test(q))return {topic:'admission-process-btech',department:'admissions'};
  if(/\b(and|also|plus)\b|మరియు|और/iu.test(q)&&/fee|ఫీజు|फीस/iu.test(q)&&/hostel|placement|transport|\bseats\b|intake/iu.test(q))return null;
  if(/hostel|హాస్టల్|हॉस्टल/iu.test(q)){if(/fee|cost|price|vacan|available|ఫీజు|खाली|शुल्क/iu.test(q))return null;return /facilit|accommod|wifi|laundry|security|is there|do you have|హాస్టల్ ఉందా|हॉस्टल है/iu.test(q)?{topic:'hostel-facilities'}:null;}
  if(/exam|hall.?ticket|result|పరీక్ష|परीक्षा|రెగ్యులర్|supplementary/iu.test(q)){if(/deadline|date|fee|when|marks|తేదీ|అంతిమ|अंतिम|कब/iu.test(q))return null;return {topic:'exams-portal'};}
@@ -56,6 +65,14 @@ export function collegeIntent(q:string):{topic?:string;clarify?:'programme'|'bra
 }
 export function contextualQuestion(question:string,lastQuestion:string,previousReply:string){
  const q=question.trim();
+ if(/^(information technology|IT|CSE|ECE|EEE|civil|mechanical)[.!?]*$/iu.test(q)&&/hod|head.{0,15}department|faculty/iu.test(lastQuestion))return `${/faculty/iu.test(lastQuestion)?'Faculty and HOD':'HOD'} ${q}`;
+ const branch=branchOf(lastQuestion),label=branch==='it'?'Information Technology':branch;
+ // Natural follow-ups can be longer than a terse menu selection. Inherit
+ // only department-specific requests; hostel/exam/club questions reset scope.
+ if(!branchOf(q)&&branch&&!/hostel|exam|club|student.?branch|student.?chapter|library|transport/iu.test(q)){
+  if(/faculty|\bhod\b|head.{0,15}department|syllabus|curriculum/iu.test(q))return `${q} ${label}`;
+  if(/\b(his|her|their)\b/iu.test(q)&&/contact|phone|number|email/iu.test(q)&&/hod|head.{0,15}department/iu.test(lastQuestion))return `${q} HOD ${label}`;
+ }
  // Inherit a department only for a short menu selection. An explicit new
  // branch always wins; an unrelated new question never inherits it.
  if(!branchOf(q)&&branchOf(lastQuestion)&&q.split(/\s+/u).length<=10&&/^(?:(?:and|what about|tell me about|its|the|okay|please)\s+)*(?:fees?|tuition|subjects?|syllabus|curriculum|faculty|admissions?|eligibility|seats|intake|hod|placements?|scholarships?|ఫీజు|సీట్లు|అడ్మిషన్|విషయాలు|फीस|विषय|प्रवेश)(?:\s+(?:please|details))?[.!?]*$/iu.test(q))return `${q} ${branchOf(lastQuestion)==='it'?'Information Technology':branchOf(lastQuestion)}`;

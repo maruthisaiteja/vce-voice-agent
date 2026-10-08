@@ -46,6 +46,44 @@ add('health','general','Campus health centre','Is there a health centre doctor i
 add('placements','placements','Career Development support','What placement training internships career development CDC support?', 'The Career Development Cell supports placements, internships, competitive-exam preparation and higher-study guidance. It doesn’t guarantee a job for an individual student.','Career Development Cell ప్లేస్‌మెంట్స్, ఇంటర్న్‌షిప్స్, పోటీ పరీక్షలు, ఉన్నత చదువులకు సహాయం చేస్తుంది. వ్యక్తిగత ఉద్యోగ హామీ కాదు.','Career Development Cell प्लेसमेंट, इंटर्नशिप, प्रतियोगी परीक्षा और उच्च शिक्षा मार्गदर्शन देता है। किसी छात्र को नौकरी की गारंटी नहीं है।','https://pat.vardhaman.org/about-cdc/');
 for(const [id,name,hod,url] of [['cse','CSE','Dr. Y. Vijayalata','https://cse.vardhaman.org/'],['it','Information Technology','Dr. Sreenivasulu Gogula','https://it.vardhaman.org/'],['mba','MBA','Manish K Srivastava','https://mba.vardhaman.org/']])add('hod-'+id,id,name+' HOD',`Who is ${name} head department HOD?`, `The department page lists ${hod} as the ${name} Head of Department.`, `డిపార్ట్‌మెంట్ పేజీలో ${name} HOD ${hod} అని ఉంది.`, `विभाग के पृष्ठ पर ${name} के HOD ${hod} हैं।`,url,true);
 add('mba-specialisations','mba','MBA specialisations','What MBA specialisations finance HR marketing entrepreneurship?', 'The MBA page lists Finance, Human Resources, Marketing and Entrepreneurship specialisations.','MBA పేజీలో Finance, Human Resources, Marketing, Entrepreneurship స్పెషలైజేషన్లు ఉన్నాయి.','MBA पृष्ठ पर Finance, Human Resources, Marketing और Entrepreneurship विशेषज्ञताएँ हैं।','https://mba.vardhaman.org/');
+// Additional call-driven coverage, independently checked on 2026-10-08.
+// New IDs only: deployment never replaces a staff edit or restores withdrawn facts.
+const reviewStart=rows.length;
+add('it-overview','it','Information Technology introduction','Give me full details about Information Technology branch overview',
+ 'Information Technology offers a B.Tech programme with a published intake of 180. Its teaching covers programming, databases, networking and cybersecurity, with practical laboratories. Would you like admission details or information about the faculty?',
+ 'Information Technologyలో B.Tech కోర్సు ఉంది; ప్రకటించిన ఇంటేక్ 180. ప్రోగ్రామింగ్, డేటాబేస్‌లు, నెట్‌వర్కింగ్, సైబర్ సెక్యూరిటీతో పాటు ప్రాక్టికల్ ల్యాబ్‌లు ఉన్నాయి. అడ్మిషన్ల గురించి కావాలా, ఫ్యాకల్టీ గురించి కావాలా?',
+ 'Information Technology में B.Tech है, जिसका प्रकाशित प्रवेश क्षमता 180 है। पढ़ाई में प्रोग्रामिंग, डेटाबेस, नेटवर्किंग और साइबर सुरक्षा के साथ प्रयोगशालाएँ शामिल हैं। प्रवेश या शिक्षकों के बारे में जानना चाहेंगे?', 'https://it.vardhaman.org/',true);
+rows[rows.length-1].topic='department-overview';
+add('it-faculty','it','IT faculty and department head','Information Technology faculty and HOD details',
+ 'Dr. Sreenivasulu Gogula heads Information Technology. The department describes faculty expertise in programming, data structures, databases, cloud computing and cybersecurity. Are you looking for a particular faculty member?',
+ 'Information Technology HOD డాక్టర్ శ్రీనివాసులు గోగుల. డిపార్ట్‌మెంట్ ప్రకారం ఫ్యాకల్టీకి ప్రోగ్రామింగ్, డేటా స్ట్రక్చర్స్, డేటాబేస్‌లు, క్లౌడ్ కంప్యూటింగ్, సైబర్ సెక్యూరిటీలో నైపుణ్యం ఉంది. ఎవరైనా ప్రత్యేక ఫ్యాకల్టీ గురించి కావాలా?',
+ 'Information Technology के विभागाध्यक्ष डॉ. श्रीनिवासुलु गोगुला हैं। विभाग प्रोग्रामिंग, डेटा स्ट्रक्चर्स, डेटाबेस, क्लाउड कंप्यूटिंग और साइबर सुरक्षा में शिक्षकों की विशेषज्ञता बताता है। क्या किसी विशेष शिक्षक की जानकारी चाहिए?', 'https://it.vardhaman.org/',true);
+add('it-hod-phone','it','IT HOD published office contact','Information Technology HOD phone contact number',
+ 'The IT department publishes Dr. Sreenivasulu Gogula’s contact number as +91 9866090396. Would you like me to repeat it?',
+ 'IT డిపార్ట్‌మెంట్‌లో డాక్టర్ శ్రీనివాసులు గోగుల సంప్రదింపు నంబర్ +91 9866090396 అని ఉంది. మళ్లీ చెప్పాలా?',
+ 'IT विभाग पर डॉ. श्रीनिवासुलु गोगुला का संपर्क नंबर +91 9866090396 दिया है। क्या दोबारा बताऊँ?', 'https://it.vardhaman.org/',true);
+add('it-study','it','IT subjects and laboratories','Information Technology subjects curriculum syllabus overview',
+ 'IT covers programming, data structures, databases and networking, alongside areas such as cloud computing and cybersecurity. Its labs include web applications, mobile applications and IoT. Which year or semester’s syllabus do you need?',
+ 'ITలో ప్రోగ్రామింగ్, డేటా స్ట్రక్చర్స్, డేటాబేస్‌లు, నెట్‌వర్కింగ్‌తో పాటు క్లౌడ్ కంప్యూటింగ్, సైబర్ సెక్యూరిటీ ఉన్నాయి. వెబ్, మొబైల్ అప్లికేషన్లు, IoT ల్యాబ్‌లు ఉన్నాయి. ఏ సంవత్సరం లేదా సెమిస్టర్ సిలబస్ కావాలి?',
+ 'IT में प्रोग्रामिंग, डेटा स्ट्रक्चर्स, डेटाबेस, नेटवर्किंग, क्लाउड कंप्यूटिंग और साइबर सुरक्षा शामिल हैं। वेब, मोबाइल एप्लिकेशन और IoT की प्रयोगशालाएँ हैं। किस वर्ष या सेमेस्टर का पाठ्यक्रम चाहिए?', 'https://it.vardhaman.org/');
+add('admission-process-btech','admissions','B.Tech admission process','B.Tech Information Technology admission details how to apply admission process',
+ 'For B.Tech, 70 percent of seats are filled through TGEAPCET counselling. The published process also has management and NRI categories. Which route are you considering?',
+ 'B.Techలో 70 శాతం సీట్లు TGEAPCET కౌన్సెలింగ్ ద్వారా భర్తీ చేస్తారు. ప్రకటించిన విధానంలో మేనేజ్‌మెంట్, NRI కేటగిరీలు కూడా ఉన్నాయి. మీరు ఏ విధంగా దరఖాస్తు చేయాలనుకుంటున్నారు?',
+ 'B.Tech की 70 प्रतिशत सीटें TGEAPCET काउंसलिंग से भरी जाती हैं। प्रकाशित प्रक्रिया में मैनेजमेंट और NRI श्रेणियाँ भी हैं। आप किस माध्यम से प्रवेश चाहते हैं?', root+'programmes/',true);
+add('student-clubs','general','Student clubs and extracurricular activities','Student clubs extra curricular co curricular activities',
+ 'Yes. Vardhaman lists Student Developers, Robotics and Gaming clubs, along with Fine Arts, Nrutya, Sports and Capture Cliq. Student Affairs coordinates these activities. Would you prefer technical clubs or cultural activities?',
+ 'అవును. వర్ధమాన్‌లో Student Developers, Robotics, Gaming, Fine Arts, Nrutya, Sports, Capture Cliq క్లబ్‌లు జాబితాలో ఉన్నాయి. Student Affairs వీటి కార్యకలాపాలను సమన్వయం చేస్తుంది. టెక్నికల్ క్లబ్‌లు కావాలా, సాంస్కృతిక కార్యక్రమాలు కావాలా?',
+ 'हाँ। वर्धमान में Student Developers, Robotics, Gaming, Fine Arts, Nrutya, Sports और Capture Cliq क्लब सूचीबद्ध हैं। Student Affairs इन गतिविधियों का समन्वय करता है। तकनीकी क्लब या सांस्कृतिक गतिविधियाँ जानना चाहेंगे?', root+'student-affairs/',true);
+add('student-chapters','general','Professional student chapters','Does Vardhaman have student branches chapters professional societies IEEE',
+ 'Yes. For example, CSE lists IEEE Computer Society, SMC and SSIT student chapters. Its CETA club runs coding contests, project expos and technical events. Are you asking about a particular department or society?',
+ 'అవును. ఉదాహరణకు CSEలో IEEE Computer Society, SMC, SSIT విద్యార్థి చాప్టర్లు ఉన్నాయి. CETA క్లబ్ కోడింగ్ పోటీలు, ప్రాజెక్ట్ ఎక్స్‌పోలు, టెక్నికల్ కార్యక్రమాలు నిర్వహిస్తుంది. ఏ డిపార్ట్‌మెంట్ లేదా సొసైటీ గురించి కావాలి?',
+ 'हाँ। उदाहरण के लिए CSE में IEEE Computer Society, SMC और SSIT छात्र शाखाएँ सूचीबद्ध हैं। CETA क्लब कोडिंग प्रतियोगिताएँ, प्रोजेक्ट प्रदर्शनी और तकनीकी कार्यक्रम करता है। किस विभाग या सोसाइटी के बारे में पूछ रहे हैं?', 'https://cse.vardhaman.org/',true);
+add('exam-process','exams','How examinations are administered','How are examinations conducted assessment evaluation process',
+ 'The Examination Branch handles scheduling, hall tickets, evaluation and results under the college’s autonomous examination system. Specific assessment rules depend on the applicable regulations. Which programme and year are you asking about?',
+ 'కాలేజీ స్వయంప్రతిపత్తి పరీక్ష విధానంలో Examination Branch షెడ్యూల్, హాల్ టికెట్లు, మూల్యాంకనం, ఫలితాలను నిర్వహిస్తుంది. మూల్యాంకన నియమాలు వర్తించే రెగ్యులేషన్స్‌పై ఆధారపడతాయి. ఏ కోర్సు, సంవత్సరం గురించి అడుగుతున్నారు?',
+ 'कॉलेज की स्वायत्त परीक्षा प्रणाली में Examination Branch समय-सारणी, हॉल टिकट, मूल्यांकन और परिणाम संभालता है। मूल्यांकन के नियम लागू विनियमों पर निर्भर हैं। किस पाठ्यक्रम और वर्ष की बात कर रहे हैं?', 'https://examination.vardhaman.org/',true);
+export const callReviewFacts=rows.slice(reviewStart);
+for(const f of callReviewFacts){f.effectiveFrom='2026-10-08';f.approvedAt='2026-10-08T00:00:00Z';f.expiresOn='2026-11-07';}
 export const collegeFacts=rows;
 export const departmentDirectory=[
  {id:'admissions',name:'Dr. K Santosh Reddy',source:root+'admissions-contact/'},

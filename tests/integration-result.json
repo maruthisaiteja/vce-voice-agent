@@ -1,6 +1,6 @@
 {
-  "passed": 98,
-  "total": 98,
+  "passed": 109,
+  "total": 109,
   "scope": "Backend actions against real SQLite with D1-shaped adapter; no live vendors",
   "results": [
     {
@@ -53,6 +53,50 @@
     },
     {
       "name": "Broad wording cannot bypass private record or staff decision rules",
+      "passed": true
+    },
+    {
+      "name": "Updated call replay: vce-it-overview",
+      "passed": true
+    },
+    {
+      "name": "Updated call replay: vce-it-faculty",
+      "passed": true
+    },
+    {
+      "name": "Updated call replay: vce-it-faculty",
+      "passed": true
+    },
+    {
+      "name": "Updated call replay: vce-it-hod-phone",
+      "passed": true
+    },
+    {
+      "name": "Updated call replay: vce-admission-process-btech",
+      "passed": true
+    },
+    {
+      "name": "Updated call replay: vce-hostel-facilities",
+      "passed": true
+    },
+    {
+      "name": "Updated call replay: vce-student-clubs",
+      "passed": true
+    },
+    {
+      "name": "Updated call replay: vce-student-chapters",
+      "passed": true
+    },
+    {
+      "name": "Updated call replay: vce-exam-process",
+      "passed": true
+    },
+    {
+      "name": "Specific unknown details do not fall through to broad website descriptions",
+      "passed": true
+    },
+    {
+      "name": "New curated answers are concise in all supported languages",
       "passed": true
     },
     {
