@@ -5,7 +5,13 @@ import {admitVoice,VoiceLimit} from './voice-budget';
 
 // HTTP template editors may serialize typed arguments as JSON strings. Accept
 // only exact boolean spellings; truthiness coercion would make "false" consent.
-const toolBoolean=z.preprocess(value=>value==='true'?true:value==='false'?false:value,z.boolean().default(false));
+const toolBoolean=z.preprocess(value=>{
+ if(typeof value!=='string')return value;
+ // Provider templates may use Python-style True/False. Accept only boolean
+ // words, ignoring case and surrounding whitespace; never coerce truthiness.
+ const word=value.trim().toLowerCase();
+ return word==='true'?true:word==='false'?false:value;
+},z.boolean().default(false));
 const requestSchema=z.object({interactionId:z.string().min(1).max(160),operation:z.enum(['start','resolve','prepare_email','request_staff','end']),language:z.enum(['en','te','hi']).default('en'),question:z.string().trim().min(1).max(2000).optional(),requestId:z.string().min(1).max(90).optional(),department:z.string().max(80).optional(),summary:z.string().trim().min(1).max(500).optional(),replyTo:z.string().max(200).default(''),consent:toolBoolean,confirmed:toolBoolean}).strict();
 async function digest(s:string){return new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)));}
 export async function sarvamToolAuthorized(req:Request){
