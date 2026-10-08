@@ -23,7 +23,7 @@ export async function POST(req:Request){
   const form=await req.formData(),meta=metadata.parse(Object.fromEntries(['title','department','effectiveFrom','expiresOn'].map(k=>[k,form.get(k)])));
   const file=form.get('file');let content=String(form.get('text')||''),filename='Pasted college information';
   if(file instanceof File&&file.size){if(file.size>3000000)throw new Error('Upload must be under 3 MB. Split larger documents.');filename=file.name.slice(0,180);const buffer=Buffer.from(await file.arrayBuffer()),extension=filename.split('.').pop()?.toLowerCase();
-   if(extension==='pdf'){const {PDFParse}=await import('pdf-parse');const parser=new PDFParse({data:buffer});try{content=(await parser.getText()).text;}finally{await parser.destroy();}}
+   if(extension==='pdf'){const {CanvasFactory,getData}=await import('pdf-parse/worker');const {PDFParse}=await import('pdf-parse');PDFParse.setWorker(getData());const parser=new PDFParse({data:buffer,CanvasFactory});try{content=(await parser.getText()).text;}finally{await parser.destroy();}}
    else if(extension==='docx'){const mammoth=await import('mammoth');content=(await mammoth.extractRawText({buffer})).value;}
    else if(['txt','md'].includes(extension||''))content=buffer.toString('utf8');else throw new Error('Use PDF, DOCX, TXT or Markdown.');
   }
